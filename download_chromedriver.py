@@ -3,6 +3,7 @@ import json
 import re
 import os
 import zipfile
+import stat
 
 # 项目的目录
 abs_path = './driver'
@@ -24,10 +25,12 @@ for key, value in result_text.items():
     mac_info_session = session.get(chrome_info)
     mac_info = mac_info_session.text
     # 获取可下载mac版本
-    chrome_version = re.search(r"chromedriver_mac(.+?).zip", mac_info).group()
+    chrome_version = re.search(r">chromedriver_mac(32|64).zip<", mac_info).group()
+    chrome_version = chrome_version[1:len(chrome_version)-1]
     # 判断文件是否存在，存在就跳过本次下载
     driver_file = sub_path + os.sep + file_name
-    if not os.path.exists(driver_file): continue
+    print(driver_file)
+    if os.path.exists(driver_file): continue
     # 生成对应的可下载连接
     print("========================================================================================================")
     print("准备下载:%s" % (chrome_version))
@@ -53,6 +56,8 @@ for key, value in result_text.items():
     for file in zip_file.namelist():
         zip_file.extract(file, sub_path)
     zip_file.close()
+    # 配置权限
+    os.chmod(abs_file_path, stat.S_IRWXU+stat.S_IRWXG+stat.S_IRWXO)
     # 删除文件
     os.remove(abs_file_path)
     print("删除压缩文件:%s" % (abs_file_path))

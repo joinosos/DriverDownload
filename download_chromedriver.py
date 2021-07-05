@@ -56,7 +56,7 @@ for key, value in result_text.items():
     for file in zip_file.namelist():
         zip_file.extract(file, sub_path)
     zip_file.close()
-    # 配置权限
+    # 配置权限 运行时权限 -rwxrwxrwx
     os.chmod(abs_file_path, stat.S_IRWXU+stat.S_IRWXG+stat.S_IRWXO)
     # 删除文件
     os.remove(abs_file_path)

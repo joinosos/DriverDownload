@@ -1,12 +1,12 @@
 ### start
 1、获取chromedriver mapper <br>
     ```
-    https://raw.githubusercontent.com/appium/appium-chromedriver/master/config/mapping.json <br>
+    https://raw.githubusercontent.com/appium/appium-chromedriver/master/config/mapping.json
     ```
     <br>
 2、从淘宝镜像中获取对应的chromedriver <br>
     ```
-    https://npm.taobao.org/mirrors/chromedriver <br>
+    https://npm.taobao.org/mirrors/chromedriver
     ```
     <br>
 3、下载对应系统的驱动,下面下载的是mac电脑驱动,可修改成win、linux <br>

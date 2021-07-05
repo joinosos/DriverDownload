@@ -6,6 +6,8 @@ import zipfile
 
 # 项目的目录
 abs_path = './driver'
+# 解压后的文件名,下面是mac的默认路径,其他系统路径不一样需要改动
+file_name = 'chromedriver'
 session = requests.session()
 # 创建文件夹
 if not os.path.exists(abs_path): os.mkdir(abs_path)
@@ -23,6 +25,9 @@ for key, value in result_text.items():
     mac_info = mac_info_session.text
     # 获取可下载mac版本
     chrome_version = re.search(r"chromedriver_mac(.+?).zip", mac_info).group()
+    # 判断文件是否存在，存在就跳过本次下载
+    driver_file = sub_path + os.sep + file_name
+    if not os.path.exists(driver_file): continue
     # 生成对应的可下载连接
     print("========================================================================================================")
     print("准备下载:%s" % (chrome_version))
